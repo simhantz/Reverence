@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     private float direction;
     private float groundCheckRadius = 0.2f;
     private int airJumpCount = 0;
+    private bool isGrounded;
+    private bool isJumping;
+    private bool jumpRelease;
+    private bool isSprinting;
+    private bool isDashing;
 
     [Header("Refrences")]
     public LayerMask groundLayer;
@@ -38,32 +43,35 @@ public class PlayerController : MonoBehaviour
         groundCheck = gameObject.transform.GetChild(0);
     }
 
-
-    void Update()
+    private void Update()
     {
         if (direction != 0)
         {
             lastDirection = direction;
         }
+        isGrounded = IsGrounded();
         direction = Input.GetAxisRaw("Horizontal");
+        isJumping = Input.GetButtonDown("Jump");
+        jumpRelease = Input.GetButtonUp("Jump");
+        isSprinting = Input.GetKey(sprintKey);
+        Jump();
+        Sprint();
+        Dash();
+    }
+    void FixedUpdate()
+    {
         rb.velocity = new Vector2(speed * direction, rb.velocity.y);
-
-        bool isGrounded = IsGrounded();
-
-        Sprint(isGrounded);
-        Jump(isGrounded);
-        Dash(isGrounded, direction, lastDirection);
     }
 
-    void Jump(bool isGrounded)
+    void Jump()
     {
         if (!isGrounded)
         {
-            if (Input.GetButtonUp("Jump") && rb.velocity.y >= 0f)
+            if (jumpRelease && rb.velocity.y >= 0f)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
-            if (Input.GetButtonDown("Jump") && airJumpCount < maxJumpCount)
+            if (isJumping && airJumpCount < maxJumpCount)
             {
                 rb.velocity = new Vector2(rb.velocity.x, airJumpPower);
                 airJumpCount++;
@@ -72,16 +80,15 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Jump"))
+            if (isJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             }
-
             airJumpCount = 0;
         }
-        
+
     }
-    void Sprint(bool isGrounded)
+    void Sprint()
     {
         if (!isGrounded)
         {
@@ -95,15 +102,15 @@ public class PlayerController : MonoBehaviour
         else speed = _speed;
     }
     // Dash? More like "blink" am I right? Ha Ha Ha!!!
-    void Dash(bool isGrounded, float dir, float lastDir)
+    void Dash()
     {
-        if (Input.GetKeyDown(dashKey) && dir != 0)
+        if (Input.GetKeyDown(dashKey) && direction != 0)
         {
             rb.velocity = new Vector2(dashPower * direction, rb.velocity.y);
         }
         else if (Input.GetKeyDown(dashKey))
         {
-            rb.velocity = new Vector2(dashPower * lastDir, rb.velocity.y);
+            rb.velocity = new Vector2(dashPower * lastDirection, rb.velocity.y);
         }
     }
     bool IsGrounded()
