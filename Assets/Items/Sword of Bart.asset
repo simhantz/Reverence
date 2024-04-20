@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9073a8ab1e86a0d4380672f1826ea906, type: 3}
-  m_Name: new Item
+  m_Name: Sword of Bart
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  type: 0
+  name: Sword of Bart
+  description: A sword that once belonged to Bart...
+  icon: {fileID: 21300000, guid: 471d235f50e65df42b408b34940f1a1f, type: 3}
+  prefab: {fileID: 0}
+  type: 1

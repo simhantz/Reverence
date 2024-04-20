@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
     private Transform groundCheck;
 
     private float _speed;
@@ -17,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private bool jumpRelease;
     private bool isSprinting;
     private bool isDashing;
+
+    [HideInInspector]
+    public Rigidbody2D rb;
 
     [Header("Refrences")]
     public LayerMask groundLayer;
@@ -36,13 +38,12 @@ public class PlayerController : MonoBehaviour
     public KeyCode dashKey = KeyCode.LeftShift;
 
 
-    void Start()
+    void Awake()
     {
         _speed = speed;
         rb = GetComponent<Rigidbody2D>();
         groundCheck = gameObject.transform.GetChild(0);
     }
-
     private void Update()
     {
         if (direction != 0)
@@ -50,10 +51,14 @@ public class PlayerController : MonoBehaviour
             lastDirection = direction;
         }
         isGrounded = IsGrounded();
+
+        #region Inputs
         direction = Input.GetAxisRaw("Horizontal");
         isJumping = Input.GetButtonDown("Jump");
         jumpRelease = Input.GetButtonUp("Jump");
         isSprinting = Input.GetKey(sprintKey);
+        #endregion
+
         Jump();
         Sprint();
         Dash();
@@ -104,13 +109,10 @@ public class PlayerController : MonoBehaviour
     // Dash? More like "blink" am I right? Ha Ha Ha!!!
     void Dash()
     {
-        if (Input.GetKeyDown(dashKey) && direction != 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            rb.velocity = new Vector2(dashPower * direction, rb.velocity.y);
-        }
-        else if (Input.GetKeyDown(dashKey))
-        {
-            rb.velocity = new Vector2(dashPower * lastDirection, rb.velocity.y);
+            // Dashes
+            Debug.Log("You dashed!");
         }
     }
     bool IsGrounded()
