@@ -32,17 +32,19 @@ public class InventoryManager : MonoBehaviour
     {
         if (listOfItems.Count < listSize)
         {
-            if (listOfItems.Contains(item))
-            {
-                ItemInstance result = listOfItems.Find(x => x == item);
-                result.itemAmount += 1;
-            }
-            else
-            {
-                Debug.Log("Added " + item.itemName + " to a inventory");
-                listOfItems.Add(item);
-            }
+            //if (listOfItems.Contains(item))
+            //{
+            //    ItemInstance result = listOfItems.Find(x => x == item);
+            //    result.itemAmount += 1;
+            //}
+            //else
+            //{
+            //    Debug.Log("Added " + item.itemName + " to a inventory");
+            //    listOfItems.Add(item);
+            //}
 
+            Debug.Log("Added " + item.itemName + " to a inventory");
+            listOfItems.Add(item);
 
         }
         else Debug.Log("Inventory is full");

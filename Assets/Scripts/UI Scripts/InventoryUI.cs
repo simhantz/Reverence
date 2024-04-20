@@ -20,6 +20,10 @@ public class InventoryUI : MonoBehaviour
 
         inventory.onInventoryUpdate += RefreshUI;
     }
+    private void Start()
+    {
+        inventoryBackPanel.SetActive(false);
+    }
     private void Update()
     {
         OpenInventory();
