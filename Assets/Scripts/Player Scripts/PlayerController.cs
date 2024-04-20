@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Transform groundCheck;
-
-    private float _speed;
-    private float lastDirection;
-    private float direction;
-    private float groundCheckRadius = 0.2f;
-    private int airJumpCount = 0;
-    private bool isGrounded;
-    private bool isJumping;
-    private bool jumpRelease;
-    private bool isSprinting;
-    private bool isDashing;
 
     [HideInInspector]
     public Rigidbody2D rb;
@@ -37,6 +25,18 @@ public class PlayerController : MonoBehaviour
     public KeyCode sprintKey =KeyCode.LeftControl;
     public KeyCode dashKey = KeyCode.LeftShift;
 
+    private Transform groundCheck;
+
+    private float _speed;
+    private float lastDirection;
+    private float direction;
+    private float groundCheckRadius = 0.2f;
+    private int airJumpCount = 0;
+    private bool isGrounded;
+    private bool isJumping;
+    private bool jumpRelease;
+    private bool isDashing;
+    private bool isSprinting;
 
     void Awake()
     {

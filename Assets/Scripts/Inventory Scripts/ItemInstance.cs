@@ -14,13 +14,18 @@ public class ItemInstance
 
     public GameObject itemPrefab;
 
-    public ObjectType itemType;
+    public Sort itemSort;
+
+    public ItemData originalItem;
+
+    public int itemAmount = 1;
 
     public ItemInstance(ItemData item)
     {
         itemName = item.name;
         itemDescription = item.description;
         itemIcon = item.icon;
-        itemType = item.type;
+        itemSort = item.sort;
+        originalItem = item;
     }
 }

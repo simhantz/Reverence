@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public enum ObjectType { Consume, Weapon, Equipment, QuestItem, Material,  }
+public enum Sort { Consume, Weapon, Equipment, QuestItem, Material,  }
 
 [CreateAssetMenu(fileName = "new Item", menuName = "Items")]
 public class ItemData : ScriptableObject
@@ -16,5 +16,5 @@ public class ItemData : ScriptableObject
 
     public GameObject prefab;
 
-    public ObjectType type;
+    public Sort sort;
 }
