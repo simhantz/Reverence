@@ -16,4 +16,9 @@ public class Interaction : MonoBehaviour
             InteractionEvent.Invoke();
         }
     }
+
+    public virtual void Interact()
+    {
+
+    }
 }
