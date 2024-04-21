@@ -7,25 +7,26 @@ using UnityEngine.UIElements;
 [Serializable]
 public class ItemInstance
 {
-    public string itemName;
-    public string itemDescription;
+    public string name = null;
 
-    public Sprite itemIcon;
+    public Sort sort;
 
-    public GameObject itemPrefab;
+    public string description = null;
 
-    public Sort itemSort;
+    public Sprite icon = null;
 
-    public ItemData originalItem;
+    public GameObject prefab = null;
 
-    public int itemAmount = 1;
+    public ItemData originalData = null;
+
+    public int amountOf = 1;
 
     public ItemInstance(ItemData item)
     {
-        itemName = item.name;
-        itemDescription = item.description;
-        itemIcon = item.icon;
-        itemSort = item.sort;
-        originalItem = item;
+        name = item.name;
+        description = item.baseDescription;
+        icon = item.baseIcon;
+        sort = item.baseSort;
+        originalData = item;
     }
 }

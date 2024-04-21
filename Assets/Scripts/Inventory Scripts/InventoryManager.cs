@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour
 
     public ItemData testItem;
 
-    public int listSize = 18;
+    public int listCapacity = 18;
 
     private int lastListCount;
 
@@ -28,26 +28,54 @@ public class InventoryManager : MonoBehaviour
         ListUpdate(lastListCount);
         lastListCount = listOfItems.Count;
     }
-    public void AddItem(ItemInstance item)
+    public void AddItem(ItemInstance itemInstance)
     {
-        if (listOfItems.Count < listSize)
+        if ((listOfItems.Count < listCapacity) == false)
         {
-            //if (listOfItems.Contains(item))
-            //{
-            //    ItemInstance result = listOfItems.Find(x => x == item);
-            //    result.itemAmount += 1;
-            //}
-            //else
-            //{
-            //    Debug.Log("Added " + item.itemName + " to a inventory");
-            //    listOfItems.Add(item);
-            //}
-
-            Debug.Log("Added " + item.itemName + " to a inventory");
-            listOfItems.Add(item);
-
+            Debug.Log("Inventory is full");
+            return;
         }
-        else Debug.Log("Inventory is full");
+        if (listOfItems.Count == 0) 
+        {
+            Debug.Log("Added " + itemInstance.name + " to a inventory");
+            listOfItems.Add(itemInstance);
+            return;
+        }
+        //foreach (ItemInstance checker in listOfItems)
+        //{
+        //    if (checker.originalItem == itemInstance.originalItem)
+        //    {
+        //        Debug.Log("Contains One Version of This Item: " + itemInstance.itemName);
+        //        checker.itemAmount += 1;
+
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("Added " + itemInstance.itemName + " to a inventory");
+        //        listOfItems.Add(itemInstance);
+        //    }
+
+        //}
+        for (int i = 0; i < listOfItems.Count; i++)
+        {
+            //if (listOfItems[i] == itemInstance == itemInstance.originalData)
+            //{
+            //    Debug.Log("Contains One Version of This Item: " + itemInstance.name);
+            //    listOfItems[i].amountOf += 1;
+            //    return;
+            //}
+            if (listOfItems[i].originalData == itemInstance.originalData && itemInstance.originalData != null)
+            {
+                Debug.Log("Contains One Version of This Item: " + itemInstance.name);
+                listOfItems[i].amountOf += itemInstance.amountOf;
+                return;
+            }
+        }
+        Debug.Log("Added " + itemInstance.name + " to a inventory");
+        listOfItems.Add(itemInstance);
+
+        
+
     }
     public void TestItemAdd(ItemData data)
     {
@@ -59,7 +87,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void TransferTo(InventoryManager target)
     {
-        Debug.Log($"Transferred {listOfItems[0].itemName} to {target.name}");
+        Debug.Log($"Transferred {listOfItems[0].name} to {target.name}");
         target.AddItem(listOfItems[0]);
         listOfItems.RemoveAt(0);
     }

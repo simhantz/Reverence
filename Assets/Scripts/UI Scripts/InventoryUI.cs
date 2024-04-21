@@ -34,7 +34,7 @@ public class InventoryUI : MonoBehaviour
         {
             if (inventory.listOfItems.Count > i)
             {
-                icons[i].image.sprite = inventory.listOfItems[i].itemIcon;
+                icons[i].image.sprite = inventory.listOfItems[i].icon;
                 icons[i].image.enabled = true;
             }
             if (icons[i].image.sprite != null && inventory.listOfItems.Count <= i)

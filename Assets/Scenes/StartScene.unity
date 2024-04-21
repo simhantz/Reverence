@@ -2156,7 +2156,7 @@ MonoBehaviour:
   dashPower: 100
   maxJumpCount: 1
   jumpPower: 16
-  airJumpPower: 10
+  airJumpPower: 14
   sprintKey: 306
   dashKey: 304
 --- !u!114 &771414975
@@ -2173,7 +2173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfItems: []
   testItem: {fileID: 11400000, guid: 49ce49109fa741f409f53a9ab1920e65, type: 2}
-  listSize: 18
+  listCapacity: 18
 --- !u!1 &779447635
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,22 +4029,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfItems:
-  - itemName: Sword
-    itemDescription: 
-    itemIcon: {fileID: 21300000, guid: 2777fb09a3110644f95ddcbbe19d1141, type: 3}
-    itemPrefab: {fileID: 0}
-    itemSort: 0
-    originalItem: {fileID: 0}
-    itemAmount: 0
-  - itemName: Staff
-    itemDescription: 
-    itemIcon: {fileID: 21300000, guid: 3cf2eb9fe850dd14d89718a2b58ec22b, type: 3}
-    itemPrefab: {fileID: 0}
-    itemSort: 0
-    originalItem: {fileID: 0}
-    itemAmount: 0
+  - name: Staff of Doom
+    sort: 1
+    description: Doomeenering
+    icon: {fileID: 21300000, guid: a6d31e17314bd444daa17278d6c0a23e, type: 3}
+    prefab: {fileID: 0}
+    originalData: {fileID: 0}
+    amountOf: 0
+  - name: Swordling
+    sort: 1
+    description: 
+    icon: {fileID: 21300000, guid: 2777fb09a3110644f95ddcbbe19d1141, type: 3}
+    prefab: {fileID: 0}
+    originalData: {fileID: 0}
+    amountOf: 0
   testItem: {fileID: 11400000, guid: 49ce49109fa741f409f53a9ab1920e65, type: 2}
-  listSize: 18
+  listCapacity: 18
 --- !u!114 &1511564997
 MonoBehaviour:
   m_ObjectHideFlags: 0

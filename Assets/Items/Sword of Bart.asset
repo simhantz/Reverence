@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword of Bart
   m_EditorClassIdentifier: 
   name: Sword of Bart
-  description: A sword that once belonged to Bart...
-  icon: {fileID: 21300000, guid: 471d235f50e65df42b408b34940f1a1f, type: 3}
-  prefab: {fileID: 0}
-  type: 1
+  baseSort: 1
+  baseDescription: Bart's Sword
+  baseIcon: {fileID: 21300000, guid: 471d235f50e65df42b408b34940f1a1f, type: 3}
+  basePrefab: {fileID: 0}

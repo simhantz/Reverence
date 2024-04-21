@@ -10,11 +10,13 @@ public enum Sort { Consume, Weapon, Equipment, QuestItem, Material,  }
 public class ItemData : ScriptableObject
 {
     public new string name;
-    public string description;
 
-    public Sprite icon;
+    public Sort baseSort;
 
-    public GameObject prefab;
+    public string baseDescription;
 
-    public Sort sort;
+    public Sprite baseIcon = null;
+
+    public GameObject basePrefab = null;
+
 }
