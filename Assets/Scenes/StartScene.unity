@@ -603,22 +603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e108cfe2d7c43b41be053f5be6f1b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testItem: {fileID: 11400000, guid: 49ce49109fa741f409f53a9ab1920e65, type: 2}
-  listOfItems:
-  - name: Staff of Doom
-    sort: 1
-    description: Doomeenering
-    icon: {fileID: 21300000, guid: a6d31e17314bd444daa17278d6c0a23e, type: 3}
-    prefab: {fileID: 0}
-    originalData: {fileID: 0}
-    amountOf: 0
-  - name: Swordling
-    sort: 1
-    description: 
-    icon: {fileID: 21300000, guid: 2777fb09a3110644f95ddcbbe19d1141, type: 3}
-    prefab: {fileID: 0}
-    originalData: {fileID: 0}
-    amountOf: 0
+  testItem: {fileID: 11400000, guid: 647caed12f36fee4299a286377465960, type: 2}
+  listOfItems: []
 --- !u!114 &50605736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3491,6 +3477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1058855530}
   - component: {fileID: 1058855532}
+  - component: {fileID: 1058855533}
   - component: {fileID: 1058855531}
   m_Layer: 0
   m_Name: NPC
@@ -3572,90 +3559,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1075882364
-GameObject:
+--- !u!114 &1058855533
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1075882365}
-  - component: {fileID: 1075882366}
-  m_Layer: 0
-  m_Name: Golden Chest 1 - frame  00
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1075882365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075882364}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: -0.9, z: 100.2352}
-  m_LocalScale: {x: 1.889082, y: 1.881354, z: 1.38}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 1511564995}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1075882366
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075882364}
+  m_GameObject: {fileID: 1058855528}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1332416811
-  m_SortingLayer: -1
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cee79323046d291498197ba635fd2cc0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.3333334, y: 0.8333333}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e108cfe2d7c43b41be053f5be6f1b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testItem: {fileID: 11400000, guid: 0dc3c898c9cf5584f9e49b41f2ccaadf, type: 2}
+  listOfItems: []
 --- !u!1 &1091268361
 GameObject:
   m_ObjectHideFlags: 0
@@ -4353,96 +4270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 0}
---- !u!1 &1511564994
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1511564995}
-  - component: {fileID: 1511564996}
-  - component: {fileID: 1511564997}
-  m_Layer: 0
-  m_Name: Chest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1511564995
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511564994}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.86355525, y: -2.645806, z: -100.2352}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1075882365}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1511564996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511564994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e108cfe2d7c43b41be053f5be6f1b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testItem: {fileID: 11400000, guid: 49ce49109fa741f409f53a9ab1920e65, type: 2}
-  listOfItems:
-  - name: Staff of Doom
-    sort: 1
-    description: Doomeenering
-    icon: {fileID: 21300000, guid: a6d31e17314bd444daa17278d6c0a23e, type: 3}
-    prefab: {fileID: 0}
-    originalData: {fileID: 0}
-    amountOf: 0
-  - name: Swordling
-    sort: 1
-    description: 
-    icon: {fileID: 21300000, guid: 2777fb09a3110644f95ddcbbe19d1141, type: 3}
-    prefab: {fileID: 0}
-    originalData: {fileID: 0}
-    amountOf: 0
---- !u!114 &1511564997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511564994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1182345d679060408681d8fea35e1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactButton: 101
-  InteractionEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 771414975}
-        m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: TakeAll
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1511564996}
-          m_ObjectArgumentAssemblyTypeName: InventoryManager, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1628964645
 GameObject:
   m_ObjectHideFlags: 0
@@ -5335,7 +5162,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 397744920}
   - {fileID: 771414971}
-  - {fileID: 1511564995}
   - {fileID: 911615952}
   - {fileID: 779447638}
   - {fileID: 50605732}

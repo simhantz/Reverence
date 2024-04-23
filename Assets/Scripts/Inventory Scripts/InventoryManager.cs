@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 /// <summary>
 /// Hanterar Inventories och håller det mesta
@@ -93,6 +94,34 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("Added " + itemInstance.name + " to a inventory");
         listOfItems.Add(itemInstance);
         return true;
+    }
+    /// <summary>
+    /// Tar en sak från target inventory från den metoden blev kallad ifrån
+    /// </summary>
+    /// <param name="target">Vart den ska ge</param>
+    /// <param name="indexPosition">Vilket element den ska ta ifrån, 0 by default</param>
+    public void TransferTo(InventoryManager target, int indexPosition = 0)
+    {
+
+    }
+
+    /// <summary>
+    /// Ger en sak från target inventory från den metoden blev kallad ifrån
+    /// </summary>
+    /// <param name="target">Vartifrån den tar ifrån</param>
+    /// <param name="indexPosition">Vilket element den ska ta ifrån, 0 by default</param>
+    public void TransferFrom(InventoryManager target, int indexPosition = 0)
+    {
+        if (target.listOfItems.Count == 0 || target.listOfItems.Count < indexPosition)
+        {
+            return;
+        }
+
+        bool addedItem = AddItem(target.listOfItems[indexPosition]);
+        if (addedItem)
+        {
+            target.listOfItems.Remove(target.listOfItems[indexPosition]);
+        }
     }
 
     /// <summary>
