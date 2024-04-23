@@ -6,18 +6,23 @@ using System.Collections.Specialized;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Hanterar Inventories och håller det mesta
+/// </summary>
 [System.Serializable]
 public class InventoryManager : MonoBehaviour
 {
+    // En delegate så jag kan sätta in funktioner från andra script
     public Action onInventoryUpdate;
+
+    [SerializeField] private readonly int _listCapacity = 18;
+
+    // testar bara att lägga in något i listan
+    [SerializeField] private ItemData testItem;
 
     public List<ItemInstance> listOfItems = new();
 
-    public ItemData testItem;
-
-    public int listCapacity = 18;
-
-    private int lastListCount;
+    private int _lastListCount;
 
     private void Start()
     {
@@ -25,58 +30,10 @@ public class InventoryManager : MonoBehaviour
     }
     private void Update()
     {
-        ListUpdate(lastListCount);
-        lastListCount = listOfItems.Count;
+        ListUpdate(_lastListCount);
     }
-    public void AddItem(ItemInstance itemInstance)
-    {
-        if ((listOfItems.Count < listCapacity) == false)
-        {
-            Debug.Log("Inventory is full");
-            return;
-        }
-        if (listOfItems.Count == 0) 
-        {
-            Debug.Log("Added " + itemInstance.name + " to a inventory");
-            listOfItems.Add(itemInstance);
-            return;
-        }
-        //foreach (ItemInstance checker in listOfItems)
-        //{
-        //    if (checker.originalItem == itemInstance.originalItem)
-        //    {
-        //        Debug.Log("Contains One Version of This Item: " + itemInstance.itemName);
-        //        checker.itemAmount += 1;
 
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Added " + itemInstance.itemName + " to a inventory");
-        //        listOfItems.Add(itemInstance);
-        //    }
-
-        //}
-        for (int i = 0; i < listOfItems.Count; i++)
-        {
-            //if (listOfItems[i] == itemInstance == itemInstance.originalData)
-            //{
-            //    Debug.Log("Contains One Version of This Item: " + itemInstance.name);
-            //    listOfItems[i].amountOf += 1;
-            //    return;
-            //}
-            if (listOfItems[i].originalData == itemInstance.originalData && itemInstance.originalData != null)
-            {
-                Debug.Log("Contains One Version of This Item: " + itemInstance.name);
-                listOfItems[i].amountOf += itemInstance.amountOf;
-                return;
-            }
-        }
-        Debug.Log("Added " + itemInstance.name + " to a inventory");
-        listOfItems.Add(itemInstance);
-
-        
-
-    }
+    // Lägger till test saken
     public void TestItemAdd(ItemData data)
     {
         if (data != null)
@@ -85,25 +42,70 @@ public class InventoryManager : MonoBehaviour
             AddItem(myItem);
         }
     }
-    public void TransferTo(InventoryManager target)
-    {
-        Debug.Log($"Transferred {listOfItems[0].name} to {target.name}");
-        target.AddItem(listOfItems[0]);
-        listOfItems.RemoveAt(0);
-    }
-    public void TakeAll(InventoryManager target)
-    {
-        foreach (ItemInstance item in target.listOfItems.ToList())
-        {
-            AddItem(item);
-            target.listOfItems.Remove(item);
-        }
-    }
+
+    /// <summary>
+    /// Kollar om listan har ändrats och uppdaterar UI:n
+    /// </summary>
+    /// <param name="lastListCount">asdasdasdasds</param>
     private void ListUpdate(int lastListCount = 0)
     {
         if (lastListCount != listOfItems.Count && onInventoryUpdate != null)
         {
             onInventoryUpdate();
         }
+        _lastListCount = listOfItems.Count;
     }
+
+    /// <summary>
+    /// Lägger till i listan om det finns plats eller i en stack
+    /// </summary>
+    /// <param name="itemInstance">Saken som ska in</param>
+    /// <returns>En bool om den lyckades lägga in saken</returns>
+    public bool AddItem(ItemInstance itemInstance)
+    {
+        // Finns det plats?
+        if ((listOfItems.Count < _listCapacity) == false)
+        {
+            Debug.Log("Inventory is full");
+            return false;
+        }
+
+        // Om inventory är tomt slänger vi in saken och skiter i det andra
+        if (listOfItems.Count == 0) 
+        {
+            Debug.Log("Added " + itemInstance.name + " to a inventory");
+            listOfItems.Add(itemInstance);
+            return true;
+        }
+        
+        // Finns det redan en sådan sak i inventory, öka stack-sizen istället
+        for (int i = 0; i < listOfItems.Count; i++)
+        {
+            if (listOfItems[i].originalData == itemInstance.originalData && itemInstance.originalData != null)
+            {
+                Debug.Log("Contains One Version of This Item: " + itemInstance.name);
+                listOfItems[i].amountOf += itemInstance.amountOf;
+                return true;
+            }
+        }
+
+        // Om den har kommit hit så är det ett nytt item som ska läggas in
+        Debug.Log("Added " + itemInstance.name + " to a inventory");
+        listOfItems.Add(itemInstance);
+        return true;
+    }
+
+    /// <summary>
+    /// Tar allt från target
+    /// </summary>
+    /// <param name="target">Vartifrån den tar ifrån</param>
+    public void TakeAll(InventoryManager target)
+    {
+        foreach (ItemInstance item in target.listOfItems.ToList())
+        {
+            bool addedItem = AddItem(item);
+            if (addedItem)
+                target.listOfItems.Remove(item);
+        }
+    } 
 }
