@@ -4,119 +4,140 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    #region Fields
     [HideInInspector]
     public Rigidbody2D rb;
 
-    [Header("Refrences")]
-    public LayerMask groundLayer;
+    [Header("References")]
+    [SerializeField] private LayerMask _groundLayer;
 
     [Header("Move Speeds")]
-    public float speed = 10f;
-    public float sprintSpeed = 20f;
-    public float dashPower = 20f;
+    [SerializeField] private float _speed = 10f;
+    [SerializeField] private float _sprintSpeed = 20f;
+    [SerializeField] private float _dashPower = 20f;
 
     [Header("Jump Settings")]
-    public int maxJumpCount = 2;
-    public float jumpPower = 16f;
-    public float airJumpPower = 10f;
+    [SerializeField] private int _maxJumpCount = 2;
+    [SerializeField] private float _jumpPower = 16f;
+    [SerializeField] private float _airJumpPower = 10f;
 
     [Header("Keybinds")]
-    public KeyCode sprintKey =KeyCode.LeftControl;
-    public KeyCode dashKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode _sprintKey =KeyCode.LeftControl;
+    [SerializeField] private KeyCode _dashKey = KeyCode.LeftShift;
 
-    private Transform groundCheck;
+    private Transform _groundCheck;
 
-    private float _speed;
-    private float lastDirection;
-    private float direction;
-    private float groundCheckRadius = 0.2f;
-    private int airJumpCount = 0;
-    private bool isGrounded;
-    private bool isJumping;
-    private bool jumpRelease;
-    private bool isDashing;
-    private bool isSprinting;
+    private float _speedBackUp;
+    private float _lastDirection;
+    private float _direction;
+    private float _groundCheckRadius = 0.2f;
 
+    private int _airJumpCount = 0;
+
+    private bool _isGrounded;
+    private bool _isJumping;
+    private bool _jumpRelease;
+    private bool _isDashing;
+    private bool _isSprinting;
+    #endregion
     void Awake()
     {
-        _speed = speed;
+        _speedBackUp = _speed;
         rb = GetComponent<Rigidbody2D>();
-        groundCheck = gameObject.transform.GetChild(0);
+        _groundCheck = gameObject.transform.GetChild(0);
     }
     private void Update()
     {
-        if (direction != 0)
+        // Ändrar lastDirection för dashen
+        if (_direction != 0)
         {
-            lastDirection = direction;
+            _lastDirection = _direction;
         }
-        isGrounded = IsGrounded();
+        _isGrounded = IsGrounded();
 
         #region Inputs
-        direction = Input.GetAxisRaw("Horizontal");
-        isJumping = Input.GetButtonDown("Jump");
-        jumpRelease = Input.GetButtonUp("Jump");
-        isSprinting = Input.GetKey(sprintKey);
+        _direction = Input.GetAxisRaw("Horizontal");
+        _isJumping = Input.GetButtonDown("Jump");
+        _jumpRelease = Input.GetButtonUp("Jump");
+        _isSprinting = Input.GetKey(_sprintKey);
         #endregion
 
         Jump();
         Sprint();
-        Dash();
     }
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+        rb.velocity = new Vector2(_speed * _direction, rb.velocity.y);
     }
 
+    /// <summary>
+    /// Gör så att spelaren hoppar
+    /// </summary>
     void Jump()
     {
-        if (!isGrounded)
+        // 
+        if (!_isGrounded)
         {
-            if (jumpRelease && rb.velocity.y >= 0f)
+            if (_jumpRelease && rb.velocity.y >= 0f)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
-            if (isJumping && airJumpCount < maxJumpCount)
+            if (_isJumping && _airJumpCount < _maxJumpCount)
             {
-                rb.velocity = new Vector2(rb.velocity.x, airJumpPower);
-                airJumpCount++;
+                rb.velocity = new Vector2(rb.velocity.x, _airJumpPower);
+                _airJumpCount++;
             }
             return;
         }
         else
         {
-            if (isJumping)
+            if (_isJumping)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                rb.velocity = new Vector2(rb.velocity.x, _jumpPower);
             }
-            airJumpCount = 0;
+            _airJumpCount = 0;
         }
 
     }
+    /// <summary>
+    /// Gör sår man springer... WOW!!!
+    /// </summary>
     void Sprint()
     {
-        if (!isGrounded)
+        // Om man inte är på marken så kan man inte sprinta
+        if (!_isGrounded)
         {
-            speed = _speed;
+            _speed = _speedBackUp;
             return;
         }
-        if (Input.GetKey(sprintKey))
+
+        // Om kan trycker sprint knappet kan man sprinta
+        if (Input.GetKey(_sprintKey))
         {
-            speed = sprintSpeed;
+            _speed = _sprintSpeed;
         }
-        else speed = _speed;
+        else _speed = _speedBackUp;
     }
     // Dash? More like "blink" am I right? Ha Ha Ha!!!
-    void Dash()
+    // More like ass. Funkar inte. Lite skit måste skrivar om
+    bool Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(_dashKey))
         {
             // Dashes
             Debug.Log("You dashed!");
+            rb.AddForce(new Vector2(_dashPower, rb.velocity.y));
+            return true;
         }
+        else return false;
     }
+
+    /// <summary>
+    /// Ritar en cirkel och kollar om den krockar med marken
+    /// </summary>
+    /// <returns>En bool om cirkelns krockar med marken</returns>
     bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
     }
 }
