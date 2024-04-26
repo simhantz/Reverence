@@ -14,7 +14,7 @@ public class ChestUI : UI
             inventoryManager = chest;
         }
         SetPanel(this.gameObject);
-        GetIconsArray(panel);
+        //SetIconsArray(this.gameObject);
     }
 
     // Update is called once per frame

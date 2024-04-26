@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+
+    // Inventory canvas måste vara på annars funkar ej. Fixa det idiot
+
     [Header("References")]
     [SerializeField] protected PlayerController _playerController;
 
@@ -13,18 +17,14 @@ public class UI : MonoBehaviour
     protected GameObject inventoryBackPanel = null;
 
     // En array för SlotUI. Så jag kan ändra på dess sprite
-    protected SlotUI[] icons = null;
+    protected SlotUI[] icons;
 
     private void Awake()
     {
-        
-    
-
-
     }
     private void Start()
     {
-        if (inventoryManager != null)
+        if (inventoryManager != null && inventoryBackPanel != null)
         {
             // Lägger in funktionen i min delegate. Så jag slipper skapa references för att kunna använda funktionen
             inventoryManager.onInventoryUpdate += RefreshUI;
@@ -97,7 +97,7 @@ public class UI : MonoBehaviour
     /// <param name="PanelUI">Panelen som den tar från</param>
     protected void SetIconsArray(GameObject thisGameObject)
     {
-        //icons = PanelUI.GetComponentsInChildren<SlotUI>();
+        //icons = thisGameObject.GetComponentsInChildren<SlotUI>();
         icons = gameObject.transform.GetChild(0).gameObject.GetComponentsInChildren<SlotUI>();
 
     }

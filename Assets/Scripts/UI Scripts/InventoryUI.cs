@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class InventoryUI : UI
 {
+
+    // Inventory canvas måste vara på annars funkar ej. Fixa det idiot
+
     [SerializeField] private InventoryManager inventory = null;
 
     [Header("Keybinds")]
     [SerializeField] private KeyCode inventoryButton = KeyCode.Tab;
-    
+
+    private GameObject panel;
+    private SlotUI[] arraySlots;
+
+
     void Awake()
     {
         if (inventory != null)
         {
             inventoryManager = inventory;
         }
-        panel = SetPanel(this.gameObject);
-        iconArray = GetIconsArray(panel);
+
+        SetPanel(this.gameObject);
+        SetIconsArray(this.gameObject);
+
     }
 
-    
+
     void Update()
     {
         if (inventory == null)
