@@ -30,17 +30,9 @@ public class UI : MonoBehaviour
             inventoryManager.onInventoryUpdate += RefreshUI;
         }
 
-
         // En temporär lösning där inventory interfacet startar på och stängts av direkt på start
         // Annars funkar inte skiten
         inventoryBackPanel.SetActive(false);
-    }
-    private void Update()
-    {
-        if (inventoryManager != null)
-        {
-            OpenInventory();
-        }
     }
     /// <summary>
     /// Refreshar interfacet
@@ -69,7 +61,7 @@ public class UI : MonoBehaviour
     /// <summary>
     /// Öppnar inventory interfacet om man klickar på rätt knapp
     /// </summary>
-    protected void OpenInventory()
+    public void OpenUI()
     {
         // Stänger av PlayerController så man inte kan röra på sig
         _playerController.enabled = inventoryBackPanel.activeSelf;

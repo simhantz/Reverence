@@ -7,16 +7,18 @@ using UnityEngine;
 /// </summary>
 public class IChest : MonoBehaviour, IInteract
 {
+    [SerializeField] private ChestUI uI;
     private InventoryManager _chestInventory;
 
     private void Awake()
     {
         // Finns det en "InventoryManager" sätter _chestInventory till den
-        if (TryGetComponent<InventoryManager>(out InventoryManager inv))
-        {
-            _chestInventory = inv;
-        }
-        else Debug.Log("Failed to get InventoryManager Component");
+
+        //if (TryGetComponent<InventoryManager>(out InventoryManager inv))
+        //{
+        //    _chestInventory = inv;
+        //}
+        //else Debug.Log("Failed to get InventoryManager Component");
     }
     public void Interact()
     {
@@ -26,6 +28,7 @@ public class IChest : MonoBehaviour, IInteract
     // OpenChest() tar just nu allting istället för att öppna något WIP
     private void OpenChest()
     {
-        BetterInteract.playerInventory.TakeAll(_chestInventory);
+        uI.OpenUI();
+        //BetterInteract.playerInventory.TakeAll(_chestInventory);
     }
 }

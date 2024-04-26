@@ -39,7 +39,7 @@ public class InventoryUI : UI
 
         if (Input.GetKeyDown(inventoryButton))
         {
-            OpenInventory();
+            OpenUI();
         }
         
     }

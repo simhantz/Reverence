@@ -7,14 +7,14 @@ public class ChestUI : UI
     [SerializeField] private InventoryManager chest = null;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (chest != null)
         {
             inventoryManager = chest;
         }
         SetPanel(this.gameObject);
-        //SetIconsArray(this.gameObject);
+        SetIconsArray(this.gameObject);
     }
 
     // Update is called once per frame
