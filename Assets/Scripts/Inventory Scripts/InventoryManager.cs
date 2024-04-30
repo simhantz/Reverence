@@ -112,9 +112,10 @@ public class InventoryManager : MonoBehaviour
     /// <param name="indexPosition">Vilket element den ska ta ifrån, 0 by default</param>
     public void TransferFrom(InventoryManager target, int indexPosition = 0)
     {
-        if (target.listOfItems.Count == 0 || target.listOfItems.Count < indexPosition)
+        if (target.listOfItems.Count == 0 || target.listOfItems.Count < indexPosition || indexPosition == (-1) )
         {
-            return;
+            Debug.Log("No make sense index. From " + gameObject.name);
+            return ;
         }
 
         bool addedItem = AddItem(target.listOfItems[indexPosition]);

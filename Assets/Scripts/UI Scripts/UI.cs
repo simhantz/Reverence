@@ -61,7 +61,7 @@ public class UI : MonoBehaviour
     /// <summary>
     /// Öppnar inventory interfacet om man klickar på rätt knapp
     /// </summary>
-    public void OpenUI()
+    public void OpenUI(GameObject extraComponent = null)
     {
         // Stänger av PlayerController så man inte kan röra på sig
         _playerController.enabled = inventoryBackPanel.activeSelf;
@@ -71,6 +71,11 @@ public class UI : MonoBehaviour
 
         // Stoppar all rörelse. Funkar kast som fan...
         _playerController.rb.velocity = Vector2.zero;
+
+        if (extraComponent != null)
+        {
+
+        }
 
     }
     /// <summary>

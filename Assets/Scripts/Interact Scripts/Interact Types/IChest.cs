@@ -12,13 +12,6 @@ public class IChest : MonoBehaviour, IInteract
 
     private void Awake()
     {
-        // Finns det en "InventoryManager" sätter _chestInventory till den
-
-        //if (TryGetComponent<InventoryManager>(out InventoryManager inv))
-        //{
-        //    _chestInventory = inv;
-        //}
-        //else Debug.Log("Failed to get InventoryManager Component");
     }
     public void Interact()
     {
