@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    [HideInInspector]
-    public Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public bool isMoving;
 
     [Header("References")]
     [SerializeField] private LayerMask _groundLayer;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _dashKey = KeyCode.LeftShift;
 
     private Transform _groundCheck;
+    private Animator _animator;
 
     private float _speedBackUp;
     private float _lastDirection;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         _speedBackUp = _speed;
         rb = GetComponent<Rigidbody2D>();
         _groundCheck = gameObject.transform.GetChild(0);
+        _animator = GetComponentInChildren<Animator>();
     }
     private void Update()
     {
@@ -61,6 +63,8 @@ public class PlayerController : MonoBehaviour
         _jumpRelease = Input.GetButtonUp("Jump");
         _isSprinting = Input.GetKey(_sprintKey);
         #endregion
+
+        SpriteHandler();
 
         Jump();
         Sprint();
@@ -139,5 +143,22 @@ public class PlayerController : MonoBehaviour
     bool IsGrounded()
     {
         return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
+    }
+
+    public void SpriteHandler()
+    {
+        if (_direction != 0)
+        {
+            transform.localScale = new Vector3(_direction, 1, 1);
+        }
+        if (_direction == 0f)
+        {
+            _animator.SetBool("isMoving", false);
+        }
+        else
+        {
+            _animator.SetBool("isMoving", true);
+
+        }
     }
 }
