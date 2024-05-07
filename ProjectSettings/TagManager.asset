@@ -38,15 +38,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
+  - name: Skybox
     uniqueID: 1504225713
+    locked: 0
+  - name: Background (Walls etc)
+    uniqueID: 2891866387
     locked: 0
   - name: Ground
     uniqueID: 3892140449
     locked: 0
-  - name: Touchable
+  - name: Interactable (Chest etc)
     uniqueID: 2962550485
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Character/Player
+    uniqueID: 2020635351
+    locked: 0
+  - name: Character/NPC
+    uniqueID: 1174858967
+    locked: 0
+  - name: Foreground
+    uniqueID: 56972811
     locked: 0

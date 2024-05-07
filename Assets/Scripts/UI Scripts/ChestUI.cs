@@ -8,8 +8,8 @@ public class ChestUI : UI
 {
     [SerializeField] internal InventoryManager chest = null;
 
-    private GameObject button;
-    private Button[] buttonArray = null;
+    private GameObject _button;
+    private Button[] _buttonArray = null;
 
     // Start is called before the first frame update
     void Awake()
@@ -21,22 +21,22 @@ public class ChestUI : UI
         SetPanel(this.gameObject);
         SetIconsArray(this.gameObject);
 
-        button = gameObject.transform.GetChild(1).gameObject;
-        button.SetActive(false);
+        _button = gameObject.transform.GetChild(1).gameObject;
+        _button.SetActive(false);
 
-        buttonArray = GetComponentsInChildren<Button>();
+        _buttonArray = GetComponentsInChildren<Button>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        button.SetActive(inventoryBackPanel.activeSelf);
+        _button.SetActive(inventoryBackPanel.activeSelf);
     }
     public int GetIndexOfButton(Button button)
     {
-        for (int i = 0; i < chest.listOfItems.Count; i++)
+        for (int i = 0; i < chest.listItems.Count; i++)
         {
-            if (buttonArray[i] == button)
+            if (_buttonArray[i] == button)
             {
                 return i;
             }

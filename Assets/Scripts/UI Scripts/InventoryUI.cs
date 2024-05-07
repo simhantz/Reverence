@@ -7,20 +7,20 @@ public class InventoryUI : UI
 
     // Inventory canvas måste vara på annars funkar ej. Fixa det idiot
 
-    [SerializeField] private InventoryManager inventory = null;
+    [SerializeField] private InventoryManager _inventory = null;
 
     [Header("Keybinds")]
-    [SerializeField] private KeyCode inventoryButton = KeyCode.Tab;
+    [SerializeField] private KeyCode _inventoryButton = KeyCode.Tab;
 
-    private GameObject panel;
-    private SlotUI[] arraySlots;
+    private GameObject _panelUI;
+    private SlotUI[] _arraySlots;
 
 
     void Awake()
     {
-        if (inventory != null)
+        if (_inventory != null)
         {
-            inventoryManager = inventory;
+            inventoryManager = _inventory;
         }
 
         SetPanel(this.gameObject);
@@ -31,13 +31,13 @@ public class InventoryUI : UI
 
     void Update()
     {
-        if (inventory == null)
+        if (_inventory == null)
         {
             Debug.Log("No inventory refrence");
             return;
         }
 
-        if (Input.GetKeyDown(inventoryButton))
+        if (Input.GetKeyDown(_inventoryButton))
         {
             OpenUI();
         }

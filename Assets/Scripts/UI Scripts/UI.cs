@@ -9,7 +9,7 @@ public class UI : MonoBehaviour
     // Inventory canvas måste vara på annars funkar ej. Fixa det idiot
 
     [Header("References")]
-    [SerializeField] protected PlayerController _playerController;
+    [SerializeField] protected PlayerController playerController;
 
     protected InventoryManager inventoryManager = null;
 
@@ -43,15 +43,15 @@ public class UI : MonoBehaviour
         for (int i = 0; i < icons.Length; i++)
         {
             // Sätter ikonen på SlotUI till den motsvarande i item-listan
-            if (inventoryManager.listOfItems.Count > i)
+            if (inventoryManager.listItems.Count > i)
             {
-                icons[i].image.sprite = inventoryManager.listOfItems[i].icon;
+                icons[i].image.sprite = inventoryManager.listItems[i].icon;
                 icons[i].image.enabled = true;
             }
 
             // Om SlotUI har en ikon men listan inte är stor nog för att nå upp till den i-positionen
             // stänger jag av komponenten och sätter spriten/ikonen till null
-            if (icons[i].image.sprite != null && inventoryManager.listOfItems.Count <= i)
+            if (icons[i].image.sprite != null && inventoryManager.listItems.Count <= i)
             {
                 icons[i].image.enabled = false;
                 icons[i].image.sprite = null;
@@ -63,20 +63,17 @@ public class UI : MonoBehaviour
     /// </summary>
     public void OpenUI(GameObject extraComponent = null)
     {
+        
         // Stänger av PlayerController så man inte kan röra på sig
-        _playerController.enabled = inventoryBackPanel.activeSelf;
+        playerController.enabled = inventoryBackPanel.activeSelf;
 
         // Sätter interfacet till motsatsen av vad det är nu. Är det stängt öppnar det och vice versa
         inventoryBackPanel.SetActive(!inventoryBackPanel.activeSelf);
-
-        // Stoppar all rörelse. Funkar kast som fan...
-        _playerController.rb.velocity = Vector2.zero;
 
         if (extraComponent != null)
         {
 
         }
-
     }
     /// <summary>
     /// Tar panelen som sakerna är grupperade i

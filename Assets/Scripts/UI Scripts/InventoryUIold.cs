@@ -48,15 +48,15 @@ public class InventoryUIold : MonoBehaviour
         for (int i = 0; i < icons.Length; i++)
         {
             // Sätter ikonen på SlotUI till den motsvarande i item-listan
-            if (_inventory.listOfItems.Count > i)
+            if (_inventory.listItems.Count > i)
             {
-                icons[i].image.sprite = _inventory.listOfItems[i].icon;
+                icons[i].image.sprite = _inventory.listItems[i].icon;
                 icons[i].image.enabled = true;
             }
 
             // Om SlotUI har en ikon men listan inte är stor nog för att nå upp till den i-positionen
             // stänger jag av komponenten och sätter spriten/ikonen till null
-            if (icons[i].image.sprite != null && _inventory.listOfItems.Count <= i)
+            if (icons[i].image.sprite != null && _inventory.listItems.Count <= i)
             {
                 icons[i].image.enabled = false;
                 icons[i].image.sprite = null;

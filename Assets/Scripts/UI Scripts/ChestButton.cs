@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class ChestButton : MonoBehaviour
 {
-    private Button button;
-    private ChestUI chestUI;
+    private Button _button;
+    private ChestUI _chestUI;
     void Awake()
     {
-        chestUI = GetComponentInParent<ChestUI>();
-        button = gameObject.AddComponent<Button>();
-        button.onClick.AddListener(Transfer);
+        _chestUI = GetComponentInParent<ChestUI>();
+        _button = gameObject.AddComponent<Button>();
+        _button.onClick.AddListener(Transfer);
     }
     void Update()
     {
@@ -23,12 +23,14 @@ public class ChestButton : MonoBehaviour
     }
     private void Transfer()
     {
-        int index = chestUI.GetIndexOfButton(button);
+        int index = _chestUI.GetIndexOfButton(_button);
         if (index == -1)
         {
             Debug.Log("Klickade knappen har inget på den platsen");
             return;
         }
-        BetterInteract.playerInventory.TransferFrom(chestUI.chest, index);
+        Global.PlayerInventory.TransferFrom(_chestUI.chest, index);
+
+        //BetterInteract.playerInventory.TransferFrom(_chestUI.chest, index);
     }
 }

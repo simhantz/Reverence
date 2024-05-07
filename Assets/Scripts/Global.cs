@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Global : MonoBehaviour
 {
-    public InventoryManager SetPlayerInv;
+    public InventoryManager SetPlayerInv = null;
 
 
     public static InventoryManager PlayerInventory;

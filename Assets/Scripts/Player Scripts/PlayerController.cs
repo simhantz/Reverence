@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     [Header("Keybinds")]
     [SerializeField] private KeyCode _sprintKey =KeyCode.LeftControl;
     [SerializeField] private KeyCode _dashKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode _attackKey = KeyCode.C;
+
 
     private Transform _groundCheck;
     private Animator _animator;
@@ -50,6 +52,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        Attack();
+
         // Ändrar lastDirection för dashen
         if (_direction != 0)
         {
@@ -73,7 +77,15 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(_speed * _direction, rb.velocity.y);
     }
+    private void OnDisable()
+    {
+        // Gör så att man står stilla när t.ex står i meny
+        _direction = 0;
+        _animator.SetBool("isMoving", false);
+        rb.velocity = Vector3.zero;
+    }
 
+    #region Movement
     /// <summary>
     /// Gör så att spelaren hoppar
     /// </summary>
@@ -143,6 +155,18 @@ public class PlayerController : MonoBehaviour
     bool IsGrounded()
     {
         return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
+    }
+    #endregion
+
+    void Attack()
+    {
+        if (Input.GetKeyDown(_attackKey) && AttackHandler.Attackable)
+        {
+            Debug.Log("Attack");
+            AttackHandler.GrabbedEnemy.hp -= PlayerStatus.SlashDamage;
+            //AttackHandler.GrabbedEnemy.hp -= 8;
+
+        }
     }
 
     public void SpriteHandler()
