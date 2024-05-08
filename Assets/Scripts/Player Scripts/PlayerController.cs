@@ -160,12 +160,14 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
+        if (Input.GetKeyDown(_attackKey))
+        {
+            _animator.SetBool("isAttacking", true);
+        }
         if (Input.GetKeyDown(_attackKey) && AttackHandler.Attackable)
         {
             Debug.Log("Attack");
             AttackHandler.GrabbedEnemy.hp -= PlayerStatus.SlashDamage;
-            //AttackHandler.GrabbedEnemy.hp -= 8;
-
         }
     }
 
