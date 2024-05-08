@@ -24,7 +24,7 @@ public class InventoryUI : UI
         }
 
         SetPanel(this.gameObject);
-        SetIconsArray(this.gameObject);
+        SetSlotsArray(this.gameObject);
 
     }
 

@@ -11,28 +11,36 @@ public class UI : MonoBehaviour
     [Header("References")]
     [SerializeField] protected PlayerController playerController;
 
-    protected InventoryManager inventoryManager = null;
+    public InventoryManager inventoryManager = null;
 
     // Objectet som sitter under detta gameObject. Så man kan kontrollera det hela tiden
     protected GameObject inventoryBackPanel = null;
 
     // En array för SlotUI. Så jag kan ändra på dess sprite
-    protected SlotUI[] icons;
+    protected SlotUI[] slots;
 
-    private void Awake()
-    {
-    }
+    private bool done = false;
+
     private void Start()
     {
         if (inventoryManager != null && inventoryBackPanel != null)
         {
             // Lägger in funktionen i min delegate. Så jag slipper skapa references för att kunna använda funktionen
             inventoryManager.onInventoryUpdate += RefreshUI;
+            done = true;
         }
 
         // En temporär lösning där inventory interfacet startar på och stängts av direkt på start
         // Annars funkar inte skiten
         inventoryBackPanel.SetActive(false);
+    }
+    private void FixedUpdate()
+    {
+        if (!done && inventoryManager != null)
+        {
+            inventoryManager.onInventoryUpdate += RefreshUI;
+            done = true;
+        }
     }
     /// <summary>
     /// Refreshar interfacet
@@ -40,21 +48,26 @@ public class UI : MonoBehaviour
     private void RefreshUI()
     {
         // Går igenom varje SlotUI i icons arrayen
-        for (int i = 0; i < icons.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             // Sätter ikonen på SlotUI till den motsvarande i item-listan
             if (inventoryManager.listItems.Count > i)
             {
-                icons[i].image.sprite = inventoryManager.listItems[i].icon;
-                icons[i].image.enabled = true;
+                slots[i].image.sprite = inventoryManager.listItems[i].icon;
+                slots[i].image.enabled = true;
+
+                slots[i].textMesh.enabled = true;
+                slots[i].textMesh.text = inventoryManager.listItems[i].amountOf.ToString();
             }
 
             // Om SlotUI har en ikon men listan inte är stor nog för att nå upp till den i-positionen
             // stänger jag av komponenten och sätter spriten/ikonen till null
-            if (icons[i].image.sprite != null && inventoryManager.listItems.Count <= i)
+            if (slots[i].image.sprite != null && inventoryManager.listItems.Count <= i)
             {
-                icons[i].image.enabled = false;
-                icons[i].image.sprite = null;
+                slots[i].image.enabled = false;
+                slots[i].image.sprite = null;
+
+                slots[i].textMesh.enabled = false;
             }
         }
     }
@@ -69,6 +82,9 @@ public class UI : MonoBehaviour
 
         // Sätter interfacet till motsatsen av vad det är nu. Är det stängt öppnar det och vice versa
         inventoryBackPanel.SetActive(!inventoryBackPanel.activeSelf);
+
+        RefreshUI();
+
 
         if (extraComponent != null)
         {
@@ -89,10 +105,10 @@ public class UI : MonoBehaviour
     /// Tar en array av SlotUI scripts från panel gruppen
     /// </summary>
     /// <param name="PanelUI">Panelen som den tar från</param>
-    protected void SetIconsArray(GameObject thisGameObject)
+    protected void SetSlotsArray(GameObject thisGameObject)
     {
         //icons = thisGameObject.GetComponentsInChildren<SlotUI>();
-        icons = gameObject.transform.GetChild(0).gameObject.GetComponentsInChildren<SlotUI>();
+        slots = gameObject.transform.GetChild(0).gameObject.GetComponentsInChildren<SlotUI>();
 
     }
 

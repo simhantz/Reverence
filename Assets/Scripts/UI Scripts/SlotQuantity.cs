@@ -5,18 +5,11 @@ using UnityEngine;
 
 public class SlotQuantity : MonoBehaviour
 {
-    private ChestUI chest = null;
-    private TextMeshProUGUI text;
+    public TextMeshProUGUI tmpUI;
     // Start is called before the first frame update
     void Awake()
     {
-        chest = GetComponentInParent<ChestUI>();
-        text = GetComponent<TextMeshProUGUI>();
-
-        if (chest == null)
-        {
-            Debug.Log("IS NULLLLLLLLL!!!");
-        }
+        tmpUI = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame

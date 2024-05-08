@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        _animator.SetBool("isAttacking", false);
+
         Attack();
 
         // Ändrar lastDirection för dashen
@@ -160,10 +162,6 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetKeyDown(_attackKey))
-        {
-            _animator.SetBool("isAttacking", true);
-        }
         if (Input.GetKeyDown(_attackKey) && AttackHandler.Attackable)
         {
             Debug.Log("Attack");
@@ -185,6 +183,11 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("isMoving", true);
 
+        }
+
+        if (Input.GetKeyDown(_attackKey))
+        {
+            _animator.SetBool("isAttacking", true);
         }
     }
 }

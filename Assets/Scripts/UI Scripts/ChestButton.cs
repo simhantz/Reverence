@@ -29,7 +29,7 @@ public class ChestButton : MonoBehaviour
             Debug.Log("Klickade knappen har inget på den platsen");
             return;
         }
-        Global.PlayerInventory.TransferFrom(_chestUI.chest, index);
+        Global.PlayerInventory.TransferFrom(_chestUI.inventoryManager, index);
 
         //BetterInteract.playerInventory.TransferFrom(_chestUI.chest, index);
     }

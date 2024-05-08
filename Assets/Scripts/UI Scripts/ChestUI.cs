@@ -6,23 +6,18 @@ using UnityEngine.UI;
 
 public class ChestUI : UI
 {
-    [SerializeField] internal InventoryManager chest = null;
-
-    private GameObject _button;
+    private GameObject _buttonTakeAll;
     private Button[] _buttonArray = null;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (chest != null)
-        {
-            inventoryManager = chest;
-        }
         SetPanel(this.gameObject);
-        SetIconsArray(this.gameObject);
+        SetSlotsArray(this.gameObject);
+        
 
-        _button = gameObject.transform.GetChild(1).gameObject;
-        _button.SetActive(false);
+        _buttonTakeAll = gameObject.transform.GetChild(1).gameObject;
+        _buttonTakeAll.SetActive(false);
 
         _buttonArray = GetComponentsInChildren<Button>();
     }
@@ -30,11 +25,11 @@ public class ChestUI : UI
     // Update is called once per frame
     void Update()
     {
-        _button.SetActive(inventoryBackPanel.activeSelf);
+        _buttonTakeAll.SetActive(inventoryBackPanel.activeSelf);
     }
     public int GetIndexOfButton(Button button)
     {
-        for (int i = 0; i < chest.listItems.Count; i++)
+        for (int i = 0; i < inventoryManager.listItems.Count; i++)
         {
             if (_buttonArray[i] == button)
             {

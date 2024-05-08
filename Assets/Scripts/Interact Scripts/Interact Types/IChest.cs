@@ -6,13 +6,14 @@ using UnityEngine;
 /// Scriptet som hanterar kist interaktioner. Ärver från IInteract
 /// </summary>
 
+[RequireComponent(typeof(InventoryManager))]
 public class IChest : MonoBehaviour, IInteract
 {
-    [SerializeField] private ChestUI _uI;
-    private InventoryManager _chestInventory;
+    [SerializeField] private InventoryManager _chestInventory;
 
     private void Awake()
     {
+        _chestInventory = gameObject.GetComponent<InventoryManager>();
     }
     public void Interact()
     {
@@ -20,10 +21,15 @@ public class IChest : MonoBehaviour, IInteract
     }
 
     // OpenChest() tar just nu allting istället för att öppna något WIP
+    // Fixat
     private void OpenChest()
     {
-        if (_uI == null) { Debug.Log("ChestUI Refrence is NOT exist"); return; }
-        _uI.OpenUI();
-        //BetterInteract.playerInventory.TakeAll(_chestInventory);
+        if (Global.ChestUI == null)
+        {
+            Debug.Log("ChestUI Reference is NOT exist");
+            return;
+        }
+        Global.ChestUI.inventoryManager = _chestInventory;
+        Global.ChestUI.OpenUI();
     }
 }

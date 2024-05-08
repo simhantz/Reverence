@@ -86,6 +86,7 @@ public class InventoryManager : MonoBehaviour
             {
                 Debug.Log("Contains One Version of This Item: " + itemInstance.name);
                 listItems[i].amountOf += itemInstance.amountOf;
+                onInventoryUpdate();
                 return true;
             }
         }
@@ -117,6 +118,7 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("No make sense index. From " + gameObject.name);
             return ;
         }
+
 
         bool addedItem = AddItem(target.listItems[indexPosition]);
         if (addedItem)
