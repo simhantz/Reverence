@@ -16,7 +16,7 @@ public class HP : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _tmp.text = $"{PlayerStatus.HP.ToString()}/{PlayerStatus.MaxHP.ToString()}";
+        _tmp.text = $"{Global.PlayerStatus.healthPoints.ToString()}/{Global.PlayerStatus.maxHealthPoints.ToString()}";
     }
 
 

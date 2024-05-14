@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(_attackKey) && AttackHandler.Attackable)
         {
             Debug.Log("Attack");
-            AttackHandler.GrabbedEnemy.hp -= PlayerStatus.SlashDamage;
+            AttackHandler.GrabbedEnemy.healthPoints -= PlayerStatus.SlashDamage;
         }
     }
 

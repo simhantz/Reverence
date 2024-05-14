@@ -1214,7 +1214,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1174858967
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0.5518868, b: 0.5518868, a: 1}
@@ -22319,9 +22319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d66193c887578f4fbdfcb7e9be4b4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 100
-  maxHealthPoints: 100
-  slashDamage: 8
+  healthPoints: 120
+  maxHealthPoints: 150
+  slashDamage: 4
   alive: 1
 --- !u!1 &779447635
 GameObject:
@@ -22798,8 +22798,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1087788ede3a2c4db0e42c99b4503eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 100
+  healthPoints: 100
+  maxHealthPoints: 100
+  slashDamage: 8
+  alive: 1
 --- !u!1 &836327589
 GameObject:
   m_ObjectHideFlags: 0
@@ -23770,7 +23772,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1174858967
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f2ed27d6c1c3ccc48959bcca269d88f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -31434,7 +31436,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2020635351
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
   m_Color: {r: 0.8679245, g: 0.85068667, b: 0.8474546, a: 1}
@@ -32443,6 +32445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetPlayerInv: {fileID: 771414975}
+  SetPlayerStatus: {fileID: 771414979}
   SetChestUI: {fileID: 1923156011}
 --- !u!4 &1460077864
 Transform:

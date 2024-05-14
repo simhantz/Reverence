@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
-public class EnemyStatus : MonoBehaviour
+public class EnemyStatus : Status
 {
-    public int hp = 100;
-    public int maxHP = 100;
     void Start()
     {
-        hp = maxHP;
+        
     }
 }
