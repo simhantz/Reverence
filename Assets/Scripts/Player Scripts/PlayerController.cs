@@ -77,7 +77,10 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(_speed * _direction, rb.velocity.y);
+        if (!Dash())
+        {
+            rb.velocity = new Vector2(_speed * _direction, rb.velocity.y);
+        }
     }
     private void OnDisable()
     {
@@ -142,9 +145,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(_dashKey))
         {
-            // Dashes
-            Debug.Log("You dashed!");
-            rb.AddForce(new Vector2(_dashPower, rb.velocity.y));
+            float ogGravity = rb.gravityScale;
+            rb.gravityScale = 0;
+            rb.velocity = new Vector3(_dashPower * _lastDirection, rb.velocity.y);
+            rb.gravityScale = ogGravity;
             return true;
         }
         else return false;
