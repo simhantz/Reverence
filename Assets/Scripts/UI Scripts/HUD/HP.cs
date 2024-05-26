@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class HP : MonoBehaviour
 {
+
+    // tror inte den anvöänds
     public Action onHealthChange;
 
     private TextMeshProUGUI _tmp;
@@ -16,6 +18,7 @@ public class HP : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        // Updaterar HUD:n konstant. Inte optimalt men det blev så nu
         _tmp.text = $"{Global.PlayerStatus.healthPoints.ToString()}/{Global.PlayerStatus.maxHealthPoints.ToString()}";
     }
 

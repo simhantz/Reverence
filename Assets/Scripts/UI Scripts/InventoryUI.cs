@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Hanterar spelarens inventory UI
+/// </summary>
 public class InventoryUI : UI
 {
 
-    // Inventory canvas måste vara på annars funkar ej. Fixa det idiot
+    // Inventory canvas måste vara på annars funkar ej. Fixa det idiot(jag)
 
     [SerializeField] private InventoryManager _inventory = null;
 

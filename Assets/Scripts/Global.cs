@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
+/// <summary>
+/// Så jag kan ta vissa saker lite varifrån som helst
+/// </summary>
 public class Global : MonoBehaviour
 {
     public InventoryManager SetPlayerInv = null;

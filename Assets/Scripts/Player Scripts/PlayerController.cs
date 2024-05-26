@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _dashKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode _attackKey = KeyCode.C;
 
+    [SerializeField] private Timer cooldown;
+
 
     private Transform _groundCheck;
     private Animator _animator;
@@ -63,12 +65,10 @@ public class PlayerController : MonoBehaviour
         }
         _isGrounded = IsGrounded();
 
-        #region Inputs
         _direction = Input.GetAxisRaw("Horizontal");
         _isJumping = Input.GetButtonDown("Jump");
         _jumpRelease = Input.GetButtonUp("Jump");
         _isSprinting = Input.GetKey(_sprintKey);
-        #endregion
 
         SpriteHandler();
 
@@ -77,10 +77,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!Dash())
-        {
-            rb.velocity = new Vector2(_speed * _direction, rb.velocity.y);
-        }
+        rb.velocity = new Vector2(_speed * _direction, rb.velocity.y);
     }
     private void OnDisable()
     {
@@ -141,18 +138,18 @@ public class PlayerController : MonoBehaviour
     }
     // Dash? More like "blink" am I right? Ha Ha Ha!!!
     // More like ass. Funkar inte. Lite skit måste skrivar om
-    bool Dash()
-    {
-        if (Input.GetKeyDown(_dashKey))
-        {
-            float ogGravity = rb.gravityScale;
-            rb.gravityScale = 0;
-            rb.velocity = new Vector3(_dashPower * _lastDirection, rb.velocity.y);
-            rb.gravityScale = ogGravity;
-            return true;
-        }
-        else return false;
-    }
+    //bool Dash()
+    //{
+    //    if (Input.GetKeyDown(_dashKey))
+    //    {
+    //        float ogGravity = rb.gravityScale;
+    //        rb.gravityScale = 0;
+    //        rb.velocity = new Vector3(_dashPower * _lastDirection, rb.velocity.y);
+    //        rb.gravityScale = ogGravity;
+    //        return true;
+    //    }
+    //    else return false;
+    //}
 
     /// <summary>
     /// Ritar en cirkel och kollar om den krockar med marken
@@ -163,16 +160,37 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
     }
     #endregion
-
+    /// <summary>
+    /// tar inputs för attack (som är C)
+    /// </summary>
     void Attack()
     {
+        // Använder Timer classens cooldown som jag gjort
+        if (cooldown.CooldownFinished())
+        {
+            return;
+        }
+        // En bool i AttackHandler scriptet som är static. Jag kollar om jag är i range av en bandit
         if (Input.GetKeyDown(_attackKey) && AttackHandler.Attackable)
         {
+            // Spelar animationen och skadar banditen
             Debug.Log("Attack");
+            _animator.SetBool("isAttacking", true);
             AttackHandler.GrabbedEnemy.healthPoints -= PlayerStatus.SlashDamage;
+
+            // sätter den nya cooldownen
+            cooldown.SetCooldown();
+        }
+        else if (Input.GetKeyDown(_attackKey))
+        {
+            // Annars om cooldownen är klar men utan för range spelas bara animationen 
+            _animator.SetBool("isAttacking", true);
         }
     }
-
+    /// <summary>
+    /// Hanterar spriten för spelaren och vrider och vänder på dens riktning
+    /// Samt som att spela animationen
+    /// </summary>
     public void SpriteHandler()
     {
         if (_direction != 0)
@@ -187,11 +205,6 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("isMoving", true);
 
-        }
-
-        if (Input.GetKeyDown(_attackKey))
-        {
-            _animator.SetBool("isAttacking", true);
         }
     }
 }

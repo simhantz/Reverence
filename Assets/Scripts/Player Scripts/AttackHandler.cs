@@ -17,6 +17,7 @@ public class AttackHandler : MonoBehaviour
 
     void CheckIfAttackable(GameObject checkedObject)
     {
+        // Samma som ineract systemet fast lite annorlunda
         if (checkedObject.TryGetComponent<EnemyStatus>(out EnemyStatus enemyStatus) == true)
         {
             Attackable = true;

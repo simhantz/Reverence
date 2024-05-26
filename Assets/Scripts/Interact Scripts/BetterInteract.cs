@@ -40,7 +40,7 @@ public class BetterInteract : MonoBehaviour
     // Gizmos så jag kan se hur lång "interact range" jag har
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
 

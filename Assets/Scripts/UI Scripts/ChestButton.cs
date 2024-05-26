@@ -11,18 +11,21 @@ public class ChestButton : MonoBehaviour
     {
         _chestUI = GetComponentInParent<ChestUI>();
         _button = gameObject.AddComponent<Button>();
-        _button.onClick.AddListener(Transfer);
+        _button.onClick.AddListener(TransferToMainInventory);
     }
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// En test grej
+    /// </summary>
     private void Debugger()
     {
         Debug.Log("Klickade knappen");
     }
-    private void Transfer()
+    /// <summary>
+    /// Som den säger tar saker från den klickade knappen och för till spelarens inventory
+    /// </summary>
+    private void TransferToMainInventory()
     {
+        // Kollar index positionen i inventoriet och om den har något
         int index = _chestUI.GetIndexOfButton(_button);
         if (index == -1)
         {

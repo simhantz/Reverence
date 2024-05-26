@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9073a8ab1e86a0d4380672f1826ea906, type: 3}
   m_Name: Potion Of Cum
   m_EditorClassIdentifier: 
-  name: Potion of Cum
+  name: Potion of Water
   baseSort: 0
-  baseDescription: A potion made by a master-ba.. alchemist.
+  baseDescription: A potion made by an alchemist.
   baseIcon: {fileID: 21300000, guid: a247fec4e956f594ab542c6c47e0cc6f, type: 3}
   basePrefab: {fileID: 0}
